@@ -2,7 +2,7 @@
   <%=link_to 'Edit', edit_event_path(@event) %> |
 <% end %>
 <li>
-  <% if @event.avatar.nil? %>
+  <% if @event.avatar.attachment.nil? %>
     <h3>No image to show</h3>
   <% else %>
     <%= image_tag(@event.avatar, class: "image-responsive") %>
