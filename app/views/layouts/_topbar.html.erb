@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <%= link_to "TicketTopia", root_path, {:class => "navbar-brand"} %>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Edit registration', edit_user_registration_path, {:class => "nav-link"} %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to('Register', new_user_registration_path, {:class => "nav-link"}) %>
+          </li>
+        <% end %>
+      </li>
+
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Logout', destroy_user_session_path, method: :get , class: "nav-link" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Login', new_user_session_path, {:class => "nav-link"} %>
+          </li>
+        <% end %>
+        <% if can? :create, Order %>
+        <li class="nav-item">
+          <%=link_to 'Cart', '/shopping_cart', class: "nav-link" %>
+          <li class="nav-link">
+            (<%=shopping_cart_how_many_tickets()%>)
+          </li>
+        </li>
+
+        <% end %>
+
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
