@@ -1,8 +1,10 @@
 class ShoppingCartsController < ApplicationController
   def add_ticket
 
-    # Set the shopping cart if unset
-    session[:shopping_cart] ||= []
+    if session[:shopping_cart] == nil
+      session[:shopping_cart] ||= []
+    end
+
 
     begin
       ticket_type = TicketType.find(shopping_cart_params[:ticket_type_id])
@@ -20,8 +22,12 @@ class ShoppingCartsController < ApplicationController
     #render plain: "success! " + session[:shopping_cart].inspect
   end
 
-  def remove_ticket
-    # TODO
+  def remove_ticket(id)
+    tickets = shopping_cart_get_tickets()
+    ticket = tickets.where(tickets.id == id)
+    session[:shopping_cart].delete(ticket)
+    redirect_back fallback_location: root_path, flash: { notice: "Ticket removed from shopping cart!" } and return
+
   end
 
   def index

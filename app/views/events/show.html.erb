@@ -1,7 +1,13 @@
 <% if can? :edit, Event %>
   <%=link_to 'Edit', edit_event_path(@event) %> |
 <% end %>
-
+<li>
+  <% if @event.avatar.nil? %>
+    <h3>No image to show</h3>
+  <% else %>
+    <%= image_tag(@event.avatar, class: "image-responsive") %>
+  <% end %>
+</li>
 <h2><%=@event.name%></h2>
 <p><%=@event.description%></p>
 <p><%=@event.start_date%></p>

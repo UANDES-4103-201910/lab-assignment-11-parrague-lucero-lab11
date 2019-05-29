@@ -19,6 +19,7 @@
   <%= date_select :event, :start_date %>
   <%= form.label :event_venue_id %>
   <%= form.select(:event_venue_id, options_from_collection_for_select(EventVenue.all, :id, :name))%>
+  <%= form.file_field :avatar %>
 
   <div class="actions">
     <%= form.submit %>

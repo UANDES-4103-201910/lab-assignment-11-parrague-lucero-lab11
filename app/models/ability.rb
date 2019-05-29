@@ -5,8 +5,9 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    if user.admin?
+    if user.role == 'administrator'
       can :manage, :all
+      can :create, Event
     elsif !user.id.nil?
       can :read, :all
       can :create, Order
